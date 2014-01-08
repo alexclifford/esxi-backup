@@ -64,8 +64,7 @@ fi
 echo "Guest VM confirmed to be powered off."
 echo "Backing up guest VM $VMNAME ($VMID)..."
 
-#rsync -av $ESXIHOST:/vmfs/volumes/raid_datastore/$VMNAME $BACKUPDIR
-$OVLTOOLPATH --overwrite vi://$ESXIUSER:$ESXIPASS@$ESXIHOST/$VMNAME $BACKUPDIR/$VMNAME
+$OVLTOOLPATH --overwrite vi://$ESXIUSER:$ESXIPASS@$ESXIHOST/$VMNAME $BACKUPDIR
 
 echo "Backup complete!"
 echo ""
