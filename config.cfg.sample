@@ -1,0 +1,8 @@
+ESXIHOST="esxi01.example.com"
+ESXIUSER="root"
+ESXIPASS="root"
+BACKUPDIR="/var/backup_files/esxi"
+OVLTOOLPATH="/usr/bin/ovftool"
+DEBUG=0
+TRYS=6
+WAIT=20
