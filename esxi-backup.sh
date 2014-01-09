@@ -64,7 +64,7 @@ fi
 echo "Guest VM confirmed to be powered off."
 echo "Backing up guest VM $VMNAME ($VMID)..."
 
-$OVLTOOLPATH --overwrite vi://$ESXIUSER:$ESXIPASS@$ESXIHOST/$VMNAME $BACKUPDIR
+$OVLTOOLPATH --overwrite --skipManifestCheck vi://$ESXIUSER:$ESXIPASS@$ESXIHOST/$VMNAME $BACKUPDIR
 
 echo "Backup complete!"
 echo ""
