@@ -2,6 +2,13 @@
 
 # Basis of this codebase is taken from https://github.com/sixdimensionalarray/esxidown
 
+if [ $# -ne 2 ]
+then
+	echo "Usage: esxi-backup.sh vmid vmname"
+	echo "Example: esxi-backup.sh 14 test01"
+	exit 0
+fi
+
 # User input for the ID of the VM and the path to the VM files
 # These details can be obtained from `vim-cmd vmsvc/getallvms`
 VMID=$1
@@ -16,6 +23,19 @@ source config.cfg
 # $DEBUG
 # $TRYS
 # $WAIT
+
+validate_vm_exists()
+{
+	ssh $ESXIHOST vim-cmd vmsvc/getallvms 2>&1 | grep "$VMID" | grep "$VMNAME" > /dev/null 2>&1
+	STATUS=$?
+
+	if [ $STATUS -ne 0 ]
+	then
+		echo "A Virtual Machine with a name of $VMNAME and an ID of $VMID does not exist on this ESXi server..."
+		echo "Check your config.cfg file and the values you are supplying and try again."
+		exit 0
+	fi
+}
 
 validate_shutdown()
 {
@@ -42,6 +62,9 @@ validate_shutdown()
 		fi
 	fi
 }
+
+# First we need to ensure we have received valid VMID and VMNAME values
+validate_vm_exists
 
 TRY=0
 
